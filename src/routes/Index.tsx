@@ -6,7 +6,6 @@ export default function AppRoutes() {
   return (
     <Router>
       <Routes>
-        {/* Define a rota padrão para redirecionar para o login */}
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

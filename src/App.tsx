@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import AppRoutes from "./routes/Index";
-import LogoImage from "./assets/Logo.png"; // Caminho da logo
+import LogoImage from "./assets/Logo.png"; 
 
 const Background = styled.div`
   position: fixed;
@@ -20,7 +20,7 @@ const Background = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(38, 109, 241, 0.5); /* Filtro azul acima do background */
+    background: rgba(38, 109, 241, 0.5);
     z-index: 1;
   }
 `;
@@ -28,15 +28,13 @@ const Background = styled.div`
 const Logo = styled.img`
   position: absolute;
   z-index: 3;
-  width: 17vw; /* 20% da largura da tela */
+  width: 17vw; 
   
-  /* Desktop - Canto superior direito */
   top: 2vh;
   left: 1vw;
 
   @media (max-width: 768px) {
-    /* Mobile - Centralizada no topo */
-    width: 75vw; /* 30% da largura da tela */
+    width: 75vw; 
     top: 5vh;
     left: 50%;
     transform: translateX(-50%);
