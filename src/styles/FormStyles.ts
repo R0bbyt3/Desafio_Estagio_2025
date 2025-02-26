@@ -10,10 +10,14 @@ export const ContentWrapper = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 3vw; /* Tamanho ajustável */
+  font-size: 3vw; /* Tamanho padrão no desktop */
   margin-bottom: 20px;
   text-align: center;
   color: white;
+
+  @media (max-width: 768px) {
+    font-size: 6vw; /* Aumenta no mobile */
+  }
 `;
 
 export const FormContainer = styled.div`
@@ -32,13 +36,39 @@ export const ButtonContainer = styled.div`
   width: 100%;
 `;
 
-export const Button = styled.button`
-  width: 60%; 
-  max-width: 200px; /* Limite para não ficar muito grande em telas grandes */
-  height: 7.5vh; /* Altura proporcional à tela */
-  font-size: 1.5vw; /* Ajustável ao tamanho da tela */
+interface ButtonProps {
+  variant: "primary" | "secondary"; // Define o estilo do botão
+  bgColor: string; // Cor do fundo da Box, para ajustar o botão secundário
+}
+
+export const Button = styled.button<ButtonProps>`
+  width: 25%;
+  height: 7.5vh;
+  font-size: 1.5vw;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+
+  /* Estilos alternados */
+  background-color: ${({ variant, bgColor }) =>
+    variant === "primary" ? "white" : bgColor};
+  color: ${({ variant, bgColor }) =>
+    variant === "primary" ? bgColor : "white"};
+  border: ${({ variant }) =>
+    variant === "primary" ? "none" : "2px solid white"};
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 768px) {
+    width: 35%;
+    height: 5vh;
+    font-size: 4vw;
+  }
 `;
