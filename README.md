@@ -19,7 +19,6 @@ Este projeto é uma página front end desenvolvida do zero para um desafio, demo
    Acesse a pasta do projeto e instale as dependências:
    ```bash
    cd nome-do-repositorio
-   ```bash
    npm i
 
 3. **Rodar o Projeto** 
