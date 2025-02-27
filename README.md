@@ -1,4 +1,4 @@
-# Nome do Projeto
+# Projeto front-end estágio
 
 Este projeto é uma página front end desenvolvida do zero para um desafio, demonstrando conceitos básicos de desenvolvimento web e melhores práticas para a criação de interfaces de usuário.
 
