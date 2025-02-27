@@ -11,15 +11,18 @@ Este projeto é uma página front end desenvolvida do zero para um desafio, demo
 1. **Clonar o Repositório**  
 
    Clone o repositório para a sua máquina:
+   ```bash
    git clone https://github.com/seu-usuario/nome-do-repositorio.git
 
 2. **Instalar as Dependências**  
   
-  Acesse a pasta do projeto e instale as dependências:
-  cd nome-do-repositorio
-  npm i
-
+   Acesse a pasta do projeto e instale as dependências:
+   ```bash
+   cd nome-do-repositorio
+   ```bash
+   npm i
 
 3. **Rodar o Projeto** 
 
-  npm run dev
+   ```bash
+   npm run dev
