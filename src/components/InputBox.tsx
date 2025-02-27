@@ -46,7 +46,7 @@ const Input = styled.input<{
   state: "neutral" | "error" | "success";
 }>`
   width: 100%;
-  height: 8vh;
+  height: 4vh;
   max-height: 60px;
   background: rgb(244, 244, 248);
   border-radius: 12px;

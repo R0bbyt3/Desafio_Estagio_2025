@@ -72,9 +72,20 @@ export const Button = styled.button<ButtonProps>`
   }
 `;
 
-// Estilização do erro de login
 export const LoginErrorMessage = styled.p`
   color: rgb(236, 57, 26);
+  text-align: center;
+  font-size: 1.2vw;
+  font-weight: 500;
+  margin-top: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 4vw;
+  }
+`;
+
+export const LoginSuccessMessage = styled.p`
+  color: rgb(46, 204, 113); // Verde
   text-align: center;
   font-size: 1.2vw;
   font-weight: 500;

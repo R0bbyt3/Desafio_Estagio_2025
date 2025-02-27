@@ -4,17 +4,18 @@ import Box from "../components/Box";
 import InputBox from "../components/InputBox";
 import InputRow from "../components/InputRow";
 import Checkbox from "../components/Checkbox";
-import { ContentWrapper, Title, FormContainer, ButtonContainer, Button, LoginErrorMessage } from "../styles/FormStyles.ts";
+import {ContentWrapper, Title, FormContainer, ButtonContainer, Button, LoginErrorMessage, LoginSuccessMessage } from "../styles/FormStyles.ts";
 import useFormValidation from "../hooks/useFormValidation";
-import { validateName, validateCompany, validateCNPJ, validatePhone, validateEmail, validatePassword } from "../utils/Validations";
+import {validateName, validateCompany, validateCNPJ, validatePhone, validateEmail, validatePassword} from "../utils/Validations";
 
 export default function Signup() {
   const navigate = useNavigate();
   const bgColor = "rgba(77, 112, 228, 1)";
 
-  const [signupError, setSignupError] = useState(""); // Erro geral de cadastro
-  const [termsAccepted, setTermsAccepted] = useState(false); // Estado do checkbox
-  const [termsError, setTermsError] = useState(false); // Se o checkbox obrigatório não estiver marcado
+  const [signupError, setSignupError] = useState("");
+  const [signupSuccess, setSignupSuccess] = useState(""); 
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [termsError, setTermsError] = useState(false);
 
   const { values, states, handleChange, validateForm } = useFormValidation({
     name: {
@@ -37,10 +38,8 @@ export default function Signup() {
     },
   });
 
-  // Obtém a mensagem de erro de um campo específico
   const getErrorMessage = (field: string) => {
     const value = values[field] || "";
-
     switch (field) {
       case "name":
         return validateName(value);
@@ -59,9 +58,10 @@ export default function Signup() {
     }
   };
 
-  const handleSignup = () => {
-    setSignupError(""); // Reseta erro antes da validação
-    setTermsError(false); // Reseta erro do checkbox
+  const handleSignup = async () => {
+    setSignupError("");
+    setSignupSuccess("");
+    setTermsError(false);
 
     const isFormValid = validateForm();
 
@@ -76,7 +76,38 @@ export default function Signup() {
       return;
     }
 
-    console.log("Tentando cadastro...");
+    const payload = {
+      name: values.name,
+      company: values.company,
+      cnpj: values.cnpj,
+      phone: values.phone,
+      email: values.email,
+      password: values.password,
+    };
+
+    try {
+      const response = await fetch("https://homologacao.flopo.com.br/api/customers/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setSignupError(errorData.message || "Erro ao realizar cadastro.");
+        return;
+      }
+
+      const data = await response.json();
+      setSignupSuccess(data.message || "Cadastro realizado com sucesso.");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+
+    } catch (error) {
+      setSignupError("Erro de conexão. Tente novamente mais tarde.");
+    }
   };
 
   return (
@@ -145,15 +176,27 @@ export default function Signup() {
             />
           </InputRow>
 
-          <Checkbox label="Li e aceito os termos de uso" isRequired onChange={setTermsAccepted} hasError={termsError} />
+          <Checkbox
+            label="Li e aceito os termos de uso"
+            isRequired
+            onChange={setTermsAccepted}
+            hasError={termsError}
+          />
 
           {signupError && <LoginErrorMessage>{signupError}</LoginErrorMessage>}
+          {signupSuccess && (
+            <LoginSuccessMessage>{signupSuccess}</LoginSuccessMessage>
+          )}
 
           <ButtonContainer>
-          <Button variant="primary" bgColor={bgColor} onClick={handleSignup}>
+            <Button variant="primary" bgColor={bgColor} onClick={handleSignup}>
               Cadastrar
             </Button>
-            <Button variant="secondary" bgColor={bgColor} onClick={() => navigate("/login")}>
+            <Button
+              variant="secondary"
+              bgColor={bgColor}
+              onClick={() => navigate("/login")}
+            >
               Voltar
             </Button>
           </ButtonContainer>
