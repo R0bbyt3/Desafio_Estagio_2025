@@ -12,13 +12,13 @@ Este projeto é uma página front end desenvolvida do zero para um desafio, demo
 
    Clone o repositório para a sua máquina:
    ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+   git clone https://github.com/R0bbyt3/Desafio_Estagio_2025
 
 2. **Instalar as Dependências**  
   
    Acesse a pasta do projeto e instale as dependências:
    ```bash
-   cd nome-do-repositorio
+   cd Desafio_Estagio_2025
    npm i
 
 3. **Rodar o Projeto** 
